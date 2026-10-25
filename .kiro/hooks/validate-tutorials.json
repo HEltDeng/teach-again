@@ -1,0 +1,16 @@
+{
+  "version": "v1",
+  "hooks": [
+    {
+      "name": "教程与规则快速校验",
+      "trigger": "PostFileSave",
+      "description": "保存教程/规则相关文件时，只跑纯 Java 的屏幕匹配与导入校验（秒级），不触发完整 Android 构建。",
+      "matcher": "(StepMatchRules|TutorialImporter|StepTemplates|TutorialRepository)\\.java$",
+      "action": {
+        "type": "command",
+        "command": "bash scripts/validate-tutorials.sh",
+        "timeout": 60
+      }
+    }
+  ]
+}

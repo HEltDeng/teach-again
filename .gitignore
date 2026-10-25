@@ -1,0 +1,29 @@
+*.iml
+.gradle/
+local.properties
+.idea/
+build/
+app/build/
+.DS_Store
+__pycache__/
+*.pyc
+captures/
+releases/
+*.apk
+# 机器相关路径不提交
+.vscode/settings.json
+
+.presentation-build/
+
+# 归档：本机凭据、签名和演示视频不上传
+.env
+.env.*
+!.env.example
+*.jks
+*.keystore
+*.pem
+*.p12
+*.mp4
+*.mov
+*.m4v
+*.webm

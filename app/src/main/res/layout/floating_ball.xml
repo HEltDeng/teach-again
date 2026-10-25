@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="64dp" android:layout_height="64dp"
+    android:padding="4dp" android:clickable="true" android:focusable="true">
+    <TextView android:id="@+id/tv_ball" android:layout_width="56dp" android:layout_height="56dp"
+        android:background="@drawable/ball_bg" android:gravity="center" android:text="我在"
+        android:textColor="@color/white" android:textSize="17sp" android:textStyle="bold"
+        android:elevation="4dp" android:importantForAccessibility="no" />
+</FrameLayout>

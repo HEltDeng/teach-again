@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">再教我一次</string>
+    <string name="tagline">慢慢来，我陪着你</string>
+    <string name="grant_overlay">开启悬浮小帮手</string>
+    <string name="overlay_hint">需要您允许"显示在其他应用上层"，这样我才能在微信里陪着您。</string>
+    <string name="start_guide">开始跟我学</string>
+    <string name="family_create">家人教一次</string>
+    <string name="import_tutorial">导入教程</string>
+    <string name="notification_channel">悬浮小帮手</string>
+    <string name="notification_title">再教我一次</string>
+    <string name="notification_text">小帮手在这里，随时点开看步骤</string>
+    <string name="accessibility_summary">自动跟随：学习时识别微信当前页面，帮您自动翻到下一步</string>
+    <string name="accessibility_desc">仅在您开启自动跟随并正在学习时，读取微信当前页面上的文字来判断这一步是否完成。不会自动点击，不保存或上传任何内容。您可以随时关闭。</string>
+    <string name="ask_entry">告诉我，你想做什么</string>
+    <string name="ai_settings">模型设置</string>
+</resources>

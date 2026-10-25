@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  只读辅助引导配置。
+  - 仅监听窗口内容/状态变化，用于识别微信当前页面。
+  - packageNames 限定 com.tencent.mm，只在微信内生效。
+  - 不声明 canPerformGestures / flagRequestFilterKeyEvents，纯只读。
+-->
+<accessibility-service xmlns:android="http://schemas.android.com/apk/res/android"
+    android:accessibilityEventTypes="typeWindowContentChanged|typeWindowStateChanged"
+    android:accessibilityFeedbackType="feedbackGeneric"
+    android:accessibilityFlags="flagRetrieveInteractiveWindows"
+    android:canRetrieveWindowContent="true"
+    android:canTakeScreenshot="true"
+    android:notificationTimeout="300"
+    android:packageNames="com.tencent.mm"
+    android:description="@string/accessibility_desc"
+    android:summary="@string/accessibility_summary" />
