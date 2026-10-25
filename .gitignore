@@ -23,6 +23,16 @@ releases/
 *.keystore
 *.pem
 *.p12
+*.pfx
+*.key
+*.mobileprovision
+key.properties
+keystore.properties
+secrets.properties
+credentials.json
+service-account*.json
+id_rsa
+id_ed25519
 *.mp4
 *.mov
 *.m4v
