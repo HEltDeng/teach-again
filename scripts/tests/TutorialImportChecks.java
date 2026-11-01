@@ -104,6 +104,16 @@ public final class TutorialImportChecks {
                 "changed steps never inherit rules from a spoofed builtin identity");
         check(TutorialRuleResolver.resolve(camera.tutorial) == null,
                 "camera draft does not receive WeChat rules");
+        java.util.Set<String> identities = new java.util.HashSet<>();
+        boolean distinct = true;
+        for (int i = 0; i < 1000; i++) {
+            distinct &= identities.add(TutorialImporter.parse(valid).tutorial.id);
+            distinct &= identities.add(TutorialImporter.validateUntrusted(
+                    generated.tutorial.title, generated.tutorial.steps).tutorial.id);
+            distinct &= identities.add(StepGenerator.generateLocal("相机", "拍照").tutorial.id);
+        }
+        check(distinct && identities.size() == 3000,
+                "rapid imports and drafts never overwrite each other's identity");
         System.out.println("PASS: " + checks + " tutorial import checks");
     }
 }

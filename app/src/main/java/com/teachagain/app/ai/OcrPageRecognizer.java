@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Looper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
@@ -89,6 +90,7 @@ public class OcrPageRecognizer {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.R)
     private void processScreenshot(AccessibilityService.ScreenshotResult result,
                                    final Consumer<List<String>> callback) {
         Bitmap bitmap = null;

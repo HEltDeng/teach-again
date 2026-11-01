@@ -80,7 +80,7 @@ public class TutorialImporter {
             steps.add(new Tutorial.Step(st, sd));
         }
         // 永远作为用户教程（builtin=false），生成全新安全 id，绝不覆盖内置
-        String id = "user_" + System.currentTimeMillis();
+        String id = Tutorial.newUserId();
         return Result.success(new Tutorial(id, title, steps, false));
     }
 
@@ -139,7 +139,7 @@ public class TutorialImporter {
             return Result.fail("步骤太多（超过 " + MAX_STEPS + " 步），请精简。");
         }
 
-        String id = "user_" + System.currentTimeMillis();
+        String id = Tutorial.newUserId();
         return Result.success(new Tutorial(id, title, steps, false));
     }
 

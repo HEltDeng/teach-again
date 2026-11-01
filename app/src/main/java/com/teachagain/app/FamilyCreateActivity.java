@@ -305,7 +305,7 @@ public class FamilyCreateActivity extends AppCompatActivity {
         }
 
         // 编辑模式沿用原 id（覆盖保存），否则新建
-        String id = editingId != null ? editingId : "user_" + System.currentTimeMillis();
+        String id = editingId != null ? editingId : Tutorial.newUserId();
         return new Tutorial(id, title, steps, false);
     }
 

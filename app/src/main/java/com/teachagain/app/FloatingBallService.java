@@ -10,6 +10,7 @@ import android.os.*;
 import android.provider.Settings;
 import android.view.*;
 import android.widget.*;
+import androidx.core.content.ContextCompat;
 
 /** A foreground, bounded overlay. Recognition can only confirm the exact active step. */
 public class FloatingBallService extends Service {
@@ -80,8 +81,7 @@ public class FloatingBallService extends Service {
         positions = getSharedPreferences("overlay_position", MODE_PRIVATE);
         voice = new TtsHelper(this);
         IntentFilter filter = new IntentFilter(ACTION_AUTO_ADVANCE);
-        if (Build.VERSION.SDK_INT >= 33) registerReceiver(recognition, filter, RECEIVER_NOT_EXPORTED);
-        else registerReceiver(recognition, filter);
+        ContextCompat.registerReceiver(this, recognition, filter, ContextCompat.RECEIVER_NOT_EXPORTED);
         receiverRegistered = true;
     }
 

@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 /** 一个教程，含若干步骤。纯数据模型，可序列化为 JSON 存本机。 */
 public class Tutorial {
@@ -30,6 +31,11 @@ public class Tutorial {
         this.title = title;
         this.steps = steps;
         this.builtin = builtin;
+    }
+
+    /** Independent of clock precision; existing persisted IDs remain unchanged. */
+    public static String newUserId() {
+        return "user_" + UUID.randomUUID();
     }
 
     public int stepCount() {

@@ -175,7 +175,7 @@ public class StepGenerator {
     }
 
     private static Tutorial draft(String title, List<Tutorial.Step> steps) {
-        return new Tutorial("user_" + System.currentTimeMillis(), title, steps, false);
+        return new Tutorial(Tutorial.newUserId(), title, steps, false);
     }
 
     private static boolean contains(String s, String kw) { return s.contains(kw); }
