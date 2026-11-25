@@ -3,9 +3,8 @@ package com.teachagain.app.ai;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
+import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -97,9 +96,6 @@ public class ChatClient {
             if (cancelled) throw new ChatException(0, "已取消。");
 
             int code = conn.getResponseCode();
-            String resp = readBounded(code >= 200 && code < 300
-                    ? conn.getInputStream() : conn.getErrorStream());
-
             if (code == 401) throw new ChatException(401, "密钥无效或未授权（401）。请检查 API Key。");
             if (code == 429) throw new ChatException(429, "请求太频繁或额度用尽（429）。请稍后再试。");
             if (code == 302 || code == 301 || code == 307 || code == 308) {
@@ -109,7 +105,7 @@ public class ChatClient {
                 throw new ChatException(code, "服务返回错误（" + code + "）。");
             }
 
-            return extractContent(resp);
+            return extractContent(readBounded(conn.getInputStream()));
         } catch (ChatException ce) {
             throw ce;
         } catch (java.net.SocketTimeoutException te) {
@@ -141,25 +137,23 @@ public class ChatClient {
 
     private String readBounded(InputStream in) throws ChatException {
         if (in == null) return "";
-        StringBuilder sb = new StringBuilder();
-        try (BufferedReader r = new BufferedReader(
-                new InputStreamReader(in, StandardCharsets.UTF_8))) {
-            char[] buf = new char[4096];
-            int total = 0, n;
-            while ((n = r.read(buf)) != -1) {
+        try (InputStream stream = in) {
+            ByteArrayOutputStream data = new ByteArrayOutputStream();
+            byte[] buf = new byte[4096];
+            int n;
+            while ((n = stream.read(buf)) != -1) {
                 if (cancelled) throw new ChatException(0, "已取消。");
-                total += n;
-                if (total > MAX_RESPONSE_BYTES) {
+                if (n > MAX_RESPONSE_BYTES - data.size()) {
                     throw new ChatException(0, "服务返回内容过大，已中止。");
                 }
-                sb.append(buf, 0, n);
+                data.write(buf, 0, n);
             }
+            return data.toString("UTF-8");
         } catch (ChatException ce) {
             throw ce;
         } catch (Exception e) {
             throw new ChatException(0, "读取响应失败。");
         }
-        return sb.toString();
     }
 
     private String joinUrl(String base, String path) {
